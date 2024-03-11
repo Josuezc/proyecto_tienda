@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>admin</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Listado de Productos</h4>
+                        </div>
+                        
+                            <table class="table table-striped table-hover text-center" >
+                                <thead class="table-dark">
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Imagen</th>
+                                    <th>Categoría</th>
+                                     
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="producto : ${productos}">
+                                        <td th:text="${producto.id_producto}"></td>
+                                        <td th:text="${producto.nombre_producto}"></td>
+                                        <td th:text="${producto.precio_producto}"></td>
+                                        <td th:text="${producto.cantidad_producto}"></td>
+                                        <td th:text="${producto.imagen_producto}"></td>
+                                        <td th:text="${producto.id_categoria}"></td>
+                                      
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-success text-white mb-3">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

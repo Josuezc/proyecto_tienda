@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>ADMIN</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Listado de Cliente</h4>
+                        </div>
+                       
+                            <table class="table table-striped table-hover text-center" >
+                                <thead class="table-dark">
+                                    <th>Cédula</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Correo</th>
+                                    <th>Contraseña</th>
+                                    <th>Dirección</th>
+                                    <th>Activo</th>
+                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="cliente : ${clientes}">
+                                        <td th:text="${cliente.cedula_usuario}"></td>
+                                        <td th:text="${cliente.nombre_cliente}"></td>
+                                        <td th:text="${cliente.apellido_cliente}"></td>
+                                        <td th:text="${cliente.correo_cliente}"></td>
+                                        <td th:text="${cliente.contrasena_cliente}"></td>
+                                        <td th:text="${cliente.direccion_cliente}"></td>
+                                       <td th:text="${cliente.activo} ? 'Activa' : 'Inactiva'" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-success text-white mb-3">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

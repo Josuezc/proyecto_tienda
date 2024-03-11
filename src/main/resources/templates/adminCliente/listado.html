@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head >
+        <title>tienda</title>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <style>
+            .contenedor-flex {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .seccion {
+                width: 48%; /* Ajusta según tus necesidades */
+                box-sizing: border-box; /* Para incluir el padding en el ancho */
+            }
+        </style>
+
+        <div class="contenedor-flex">
+            <div class="seccion">
+                <section th:replace="~{adminCliente/listadoCliente :: listadoCliente}"/>
+               
+            </div>
+            <div class="seccion">
+
+                <section th:replace="~{adminCliente/listadoCliente :: agregarCliente}"/> 
+                 <div th:if="${not #strings.isEmpty(error)}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+
+    </body>
+</html>

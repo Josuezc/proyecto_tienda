@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>tienda - Registro e Inicio de Sesión</title>
+</head>
+<body>
+     <header th:replace="~{layout/plantilla :: header}"/>
+     <section>
+                <div class="modal fade" id="agregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header bg-info text-white">
+                                <h5 class="modal-title">Nuevo Usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <form th:action="@{/Usuarios/guardarIf}" th:object="${cliente}"
+                                  method="POST" class="was-validated" enctype="multipart/form-data">
+                                <div class="modal-body">
+
+
+                                    <div class="mb-3">
+                                        <label for="cedula_usuario">Cédula de Usuario</label>
+                                        <input type="number" class="form-control" name="cedula_usuario" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="nombre_cliente">nombre_cliente</label>
+                                        <input type="text" class="form-control" name="nombre_cliente" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="apellido_cliente">apellido_cliente</label>
+                                        <input type="text" class="form-control" name="apellido_cliente" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="correo_cliente">correo_cliente</label>
+                                        <input type="text" class="form-control" name="correo_cliente" required="true"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="contrasena_cliente">contrasena_cliente</label>
+                                        <input type="text" class="form-control" name="contrasena_cliente" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direccion_cliente">direccion_cliente</label>
+                                        <input type="text" class="form-control" name="direccion_cliente" required="true"/>
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label for="activo">[[#{p.activo}]]</label>
+                                        <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
+                                    </div> 
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+</body>
+</html>

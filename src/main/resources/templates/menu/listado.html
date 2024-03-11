@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<header> <!--Se crea un container navbar para las opciones de la pagina web-->
+    <div class="container"> 
+        <nav class="navbar navbar-light" style="background-color: #fe1a27;">
+        <a class="active" href="#"><i class="computadoras"></i> Computadoras</a>
+        <a href="#"><i class="componetes"></i> Componentes</a>
+        <a href="#"><i class="pereifericos"></i> Pereifericos</a>
+        <a href="#"><i class="accesorios"></i> Accesorios</a>
+        <a href="#"><i class="servicios"></i> Servicios</a>
+        <a href="#"><i class="outlet"></i> Outlet</a>
+        <input class="search" type="text" placeholder="Buscar productos...">
+        <!--Boton de buscar informacion-->
+    </nav>
+    </div>
+</header>
+<body>
+    <section class="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <!-- Indicadores de la posición actual del carousel -->
+            <ol class="carousel-indicators">
+                <!-- Indicador para el primer slide -->
+                <li data-target="#" data-slide-to="0" class="active"></li>
+                <!-- Indicador para el segundo slide -->
+                <li data-target="#" data-slide-to="1"></li>
+                <!-- Indicador para el tercer slide -->
+                <li data-target="" data-slide-to="2"></li>
+            </ol>
+            <!-- Contenido del carousel -->
+            <div class="carousel-inner">
+                <!-- Primer slide-->
+                <div class="carousel-item active">
+                    <img class="imagen" src="..." alt="First slide">
+                </div>
+                <!-- Segundo slide -->
+                <div class="carousel-item">
+                    <img class="imagen" src="..." alt="Second slide">
+                </div>
+                <!-- Tercer slide -->
+                <div class="carousel-item">
+                    <img class="imagen" src="..." alt="Third slide">
+                </div>
+            </div>
+            <!-- Control para retroceder al slide anterior -->
+            <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <!-- Control para avanzar al siguiente slide -->
+            <a class="carousel-control-next" href="#" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+    <footer>
+        <div class="text-center"><!--Se alinea el texto-->
+            <a>Todos nuestros precios incluyen I.V.A</a>
+            <br><!--Salto de linea-->
+            &copy; Todos los derechos de autor
+          </div>      
+    </footer>  
+    <style>
+        footer {
+            background-color: #9599a2;
+            color: white; /* Color de las letras*/
+            padding: 20px; /* Añade espaciado alrededor del contenido del footer */
+        }
+    </style>  
+    <style>
+        header a {
+            color: #ffffff; /* Cambia el color del texto en el header a blanco */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+    <style>
+        .navbar{
+            padding: 10px;
+            height: 80px;
+            width: 1100px;
+        }
+    </style>
+    </body>
+</html>

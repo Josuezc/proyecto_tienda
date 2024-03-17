@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("/categorias")
-public class CategoriasController {
+@RequestMapping("/adminCategoria")
+public class AdminCategoriasController {
   
     @Autowired
     private CategoriasService categoriasService;
@@ -29,45 +30,33 @@ public class CategoriasController {
         var categorias = categoriasService.getCategorias();
         model.addAttribute("categorias", categorias);
         model.addAttribute("totalCategorias", categorias.size());
-        return "categorias/listado"; // Quita el slash al inicio
+        return "adminCategoria/listado"; // Quita el slash al inicio
     }
     
     
      @GetMapping("/nuevo")
     public String categoriaNuevo(Categorias categoria) {
-        return "/categorias/modifica";
+        return "/adminCategoria/modifica";
     }
 
-    //@Autowired
-    //private FirebaseStorageServiceImpl firebaseStorageService;
-    
-  /* @PostMapping("/guardar")
-    public String categoriaGuardar(Categoria categoria,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {        
-        if (!imagenFile.isEmpty()) {
-            categoriaService.save(categoria);
-            categoria.setImagen(
-                    firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "categoria", 
-                            categoria.getId_producto()));
-        }
-        categoriaService.save(categoria);
-        return "redirect:/categoria/listado";
+   @PostMapping("/guardar")
+    public String categoriaGuardar(Categorias categoria){
+            
+            categoriasService.save(categoria);
+        
+        return "redirect:/adminCategoria/listado";
     }
 
-   */
-
-    @GetMapping("/eliminar/{Id}")
+    @GetMapping("/eliminar/{id_categoria}")
     public String categoriaEliminar(Categorias categoria) {
         categoriasService.delete(categoria);
-        return "redirect:/categorias/listado";
+        return "redirect:/adminCategoria/listado";
     }
 
-    @GetMapping("/modifica/{id}")
+    @GetMapping("/modifica/{id_categoria}")
     public String categoriaModificar(Categorias categoria, Model model) {
         categoria = categoriasService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
-        return "/categorias/modifica";
+        return "/adminCategoria/modifica";
     }   
 }

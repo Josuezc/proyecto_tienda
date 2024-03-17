@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
  @Controller
 @RequestMapping("/adminCliente")
-public class ClienteController {
+public class AdminClienteController {
   
     @Autowired
     private ClienteService clienteService;
@@ -78,7 +78,7 @@ private String listado(Model model) {
     public String categoriaModificar(Cliente cliente, Model model) {
         cliente = clienteService.getCategoria(cliente);
         model.addAttribute("cliente", cliente);
-        return "/adminCliente/modifica";
+        return "adminCliente/modifica";
     }
     
 

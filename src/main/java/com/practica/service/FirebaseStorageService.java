@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public interface FirebaseStorageService {
+public interface firebaseStorageService {
 
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id);
 

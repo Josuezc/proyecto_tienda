@@ -43,7 +43,7 @@ public List<Cliente> getClientes() {
         }
         return lista;
     }
-    
+  /*  
   @Override
 @Transactional
 public Cliente getCategoria(Cliente cliente) {
@@ -59,8 +59,12 @@ public Cliente getCategoria(Cliente cliente) {
     }
 
     return null; // Devolver null si no se encuentra el cliente o la contraseña es incorrecta
-}
-
+}*/
+  @Override
+    @Transactional(readOnly = true)
+    public Cliente getCategoria(Cliente Cliente) {
+        return clienteDao.findById(Cliente.getCedula_usuario()).orElse(null);
+    }
     @Override
     @Transactional
     public void save(Cliente cliente) {

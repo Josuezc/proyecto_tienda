@@ -1,58 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>admin</title>
+        <title>TechShop</title>
     </head>
-
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
 
+        <section th:replace="~{categorias/fragmentos :: categoriasTabs}"/>     
+        <section th:replace="~{categorias/fragmentos :: listadoProductos}"/> 
 
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Listado de Categorías</h4>
-                        </div>
-                        <div th:if="${categorias != null and !categorias.empty}">
-                            <table class="table table-striped table-hover text-center" >
-                                <thead class="table-dark">
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                     <th>accion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Supongamos que categorias es la lista de categorías obtenida desde el controlador -->
-                                    <tr th:each="categoria : ${categorias}">
-                                        <td th:text="${categoria.id_categoria}"></td>
-                                        <td th:text="${categoria.nombre_categoria}"></td>
-                                        <td><a th:href="@{/categorias/eliminar/}+${categoria.id_categoria}" class="btn btn-danger">
-                                                <i class="fas fa-trash"></i> eliminar
-                                            </a>
-                                            <a th:href="@{/categorias/modifica/}+${categoria.id_categoria}" class="btn btn-success">
-                                                <i class="fas fa-pencil"></i> actualizar
-                                            </a></td>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-center p-2" th:if="${categorias == null or categorias.empty}">
-                            <span>vacia</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center bg-success text-white mb-3">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+        <footer th:replace="~{layout/plantilla :: footer}"/>      
+      
     </body>
 </html>

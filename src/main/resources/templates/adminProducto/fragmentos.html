@@ -4,11 +4,12 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Admin</title>
+      
     </head>
     <body>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
-            <div class="container">
+            <div class="container" style="margin-left: 300px;">
                 <div class="row">
                     <div class="col-md-3">   
                         <button 
@@ -59,10 +60,10 @@
                                     <input type="text" class="form-control" name="cantidad_producto" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imagen_producto">[[#{producto.imagen_producto}]]</label>
-                                    <input class="form-control" type="file" name="imagen_producto" onchange="readURL(this);"/>
+                                    <label for="imagen">[[#{producto.imagen_producto}]]</label>
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
                                     <img id="blah" src="#" alt="your image" height="200"/>
-                                </div>                             
+                                </div>                        
 
 
                                 <div class="mb-3">
@@ -85,8 +86,8 @@
         </section>
 
         <!-- 3 Sección principal para mostrar la informaccion de la entidad producto -->
-        <section th:fragment="listadoProducto" id="productos">
-            <div class="container">
+        <section th:fragment="listadoProducto" id="productos" >
+            <div class="container" style="margin-left: 300px;">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
@@ -94,7 +95,7 @@
                                 <h4>[[#{producto.listado}]]</h4>
                             </div>
                             <div th:if="${productos != null and !productos.empty}">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover text-center">
                                     <thead class="table-dark">
                                         <tr><th>[[#{producto.id_producto}]]</th>
                                             <th>[[#{producto.nombre_producto}]]</th>
@@ -111,8 +112,10 @@
                                             <td th:text="${producto.nombre_producto}"></td>
                                             <td th:text="${producto.precio_producto}"></td>
                                             <td th:text="${producto.cantidad_producto}"></td>
-                                            <td th:text="${producto.imagen_producto}"></td>
-                                            <td th:text="${producto.id_categoria}"></td>
+                                            <td><img th:src="${producto.imagenfile}" alt="your image" height="50"/>
+                                            </td>
+
+                                            <td th:text="${producto.id_categoria.id_categoria}"></td>
 
                                             <td><a th:href="@{/adminProducto/eliminar/}+${producto.id_producto}"
                                                    class="btn btn-danger">
@@ -178,10 +181,10 @@
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="imagen_producto">[[#{categoria.imagen_producto}]]</label>
-                                                    <input class="form-control" type="file" name="imagen_producto"
+                                                    <label for="imagen">[[#{producto.imagen_producto}]]</label>
+                                                    <input class="form-control" type="file" name="imagenFile"
                                                            onchange="readURL(this);" />
-                                                    <img id="blah" th:src="@{${productos.imagen_producto}}" alt="your image" height="200"/>
+                                                    <img id="blah" th:src="@{${producto.imagenfile}}" alt="your image" height="200"/>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="id_categoria">[[#{producto.id_categoria}]]</label>

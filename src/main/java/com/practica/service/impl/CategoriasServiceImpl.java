@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
     
     @Autowired
     private CategoriasDao categoriasDao;
- @Autowired
-    public CategoriasServiceImpl(CategoriasDao categoriasDao) {
-        this.categoriasDao = categoriasDao;
-    }
+ 
   @Override
 @Transactional
 public List<Categorias> getCategorias() {
@@ -28,7 +25,7 @@ public List<Categorias> getCategorias() {
     
 }
     @Override
-    @Transactional()
+    @Transactional(readOnly = true)
     public Categorias getCategoria(Categorias categoria) {
         return categoriasDao.findById(categoria.getId_categoria()).orElse(null);
     }

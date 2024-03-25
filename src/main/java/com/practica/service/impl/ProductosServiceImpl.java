@@ -34,7 +34,8 @@ public List<Productos> getProductos() {
     public Productos getProducto(Productos productos) {
         return productosDao.findById(productos.getId_producto()).orElse(null);
     }
-
+ 
+    
     @Override
     @Transactional
     public void save(Productos productos) {
@@ -46,4 +47,9 @@ public List<Productos> getProductos() {
     public void delete(Productos productos) {
         productosDao.delete(productos);
     }
+    
+    
+
+ 
+    
 }

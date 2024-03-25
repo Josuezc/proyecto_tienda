@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                min-height: 100vh;
+                position: relative;
+                padding-bottom: 50px;
+            }
+
+            footer { /* estilo footer */
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: #9599a2;
+                color: white;
+                text-align: center;
+                padding: 20px;
+            }
+
+
+            header a { /* estilo para las letras del header a */
+                color: #ffffff;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            .navbar {/* Estilo para el navbar en el header  */
+                height: 90px;
+                width: 1500px;
+            }
+
+            /* Estilo para las flechas del carousel */
+            .carousel-control-prev, .carousel-control-next {
+                background-color: rgba(147, 146, 146, 0.356); /* Cambiar color de fondo */
+                width: 5%; /* Ancho de las flechas*/
+                top: 50%; /* Posiciona las flechas en el centro vertical */
+                transform: translateY(-50%); /* Centra verticalmente las flechas */
+            }
+
+            .carousel-control-prev-icon, .carousel-control-next-icon {
+                color: #020000; /* Cambiar color de las flechas */
+            }
+
+            /* Estilo para las imágenes del carousel */
+            .carousel-item img {
+                max-width: 100%;
+                height: auto;
+                max-height: calc(100vh - 150px); /* Ajustar altura máxima para evitar superposiciones de las imagenes */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Estilo para el carrusel */
+            .carousel {
+                width: 80%; /* Ancho del carrusel */
+                margin: 0 auto; /* Centra horizontalmente el carrusel */
+            }
+
+        </style>
+    </head>
+    <body>
+        <!--opciones del navbar -->
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand">Menu</a>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <ul class="navbar-nav"><!--Opciones del menu // cambiar en el th:href por ruta exacta de pagina-->
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="">Computadoras</a></li>
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="">Componentes</a></li>
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="">Pereifericos</a></li>
+                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/Usuarios/inicio}">Inicio Sesion</a></li>
+                            <li class="nav-item dropdown px-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Servicios
+                                </a><!--se le aplica el dropdown para opciones de servicio -->
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Cotizar</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- Formulario de búsqueda -->
+                        <form class="d-flex search-form">
+                            <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                            <button class="btn btn-outline-light" type="submit">Buscar</button>
+                        </form>
+                        <!-- Fin del formulario de búsqueda -->
+                        <div class="col-md-3">
+                            <ul class="navbar-nav">                                
+                                <li class="nav-item px-2"></li>
+                                </header>
+                                <section th:fragment="categoriasTabs" id="categorias">
+                                    <div class="row py-4">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a class="nav-link" 
+                                                   aria-current="page" 
+                                                   href="/pruebas/listado"
+                                                   >[[#{pruebas.todas}]]</a>
+                                            </li>
+                                            <li th:each="categoria : ${categorias}" class="nav-item">
+                                                <a class="nav-link" 
+                                                   th:href="@{/pruebas/listado/}+${categoria.idCategoria}"
+                                                   >[[${categoria.descripcion}]]</a>
+                                            </li>                    
+                                        </ul>
+                                    </div>
+                                </section>
+                                <!-- 2 Sección principal para mostrar la informaccion de la entidad producto -->
+                                <section th:fragment="listadoProductos" id="productos">
+                                    <div class="row row-cols-4">
+                                        <div class="card" th:each="p : ${productos}">
+                                            <figure><img th:src="${p.rutaImagen}" 
+                                                         class="card-img-top" alt="..."
+                                                         height="200"/>
+                                                <figcaption>[[${p.precio}+' ('+${p.existencias}+')']]
+                                                </figcaption>
+                                            </figure>
+                                            <div class="card-header">
+                                                <h4 class="card-title">[[${p.descripcion}]]</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">[[${p.detalle}]]</p>                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- 3 Sección para crear los filtros -->
+                                <section th:fragment="filtros" class="bg-light">
+                                    <div class="row py-2">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3">
+                                            <form method="POST" th:action="@{/pruebas/query1}" 
+                                                  class="was-validated">
+                                                <div class="card">                            
+                                                    <div class="card-body">
+                                                        <div class="mb-3">
+                                                            <label for="precioInf">[[#{pruebas.precio.inferior}]]</label>
+                                                            <input type="number" class="form-control" 
+                                                                   th:value="${precioInf}"
+                                                                   th:name="precioInf" required="true"/>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
+                                                            <input type="number" class="form-control" 
+                                                                   th:value="${precioSup}"
+                                                                   th:name="precioSup" required="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-center">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <i class="fas fa-check"></i> [[#{pruebas.ampliadas}]]
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <footer>
+                                    <div>Todos nuestros precios incluyen I.V.A</div>
+                                    <div>&copy; Todos los derechos de autor</div>
+                                </footer>
+
+                                <!-- Carga de Bootstrap JS para que funcione -->
+                                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+                                </body>
+                                </html>

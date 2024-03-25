@@ -19,6 +19,9 @@ public class MenuController {
     @GetMapping("/listado")
     public String showListadoPage() {
         // Lógica para mostrar la página de listado
-        return "menu/listado"; // Asegúrate de que esta sea la vista correcta
+        return "categorias/listado"; // Asegúrate de que esta sea la vista correcta
     }
+    
 }
+
+ 

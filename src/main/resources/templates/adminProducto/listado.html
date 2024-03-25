@@ -3,9 +3,12 @@
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>admin</title>
+    
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"/>
+      
+        <aside th:replace="~{layout/plantilla :: aside}"/>
 
         <section th:replace="~{adminProducto/fragmentos :: botonesAgregar}"/>
         <section th:replace="~{adminProducto/fragmentos :: agregarProducto}"/> 

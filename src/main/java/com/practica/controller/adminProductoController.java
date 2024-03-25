@@ -4,11 +4,10 @@
  */
 package com.practica.controller;
 
-
-
 import com.practica.domain.Productos;
 import com.practica.service.CategoriasService;
-import com.practica.service.firebaseStorageService;
+import com.practica.service.FirebaseStorageService;
+import com.practica.service.impl.FirebaseStorageServiceImpl;
 import com.practica.service.productosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,16 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author alexa
  */
-
 @Controller
 @RequestMapping("/adminProducto")
 public class adminProductoController {
-  
+
     @Autowired
     private productosService productosService;
     @Autowired
     private CategoriasService categoriaService;
-    
+
     @GetMapping("/listado")
     private String listado(Model model) {
         var productos = productosService.getProductos();
@@ -43,39 +41,42 @@ public class adminProductoController {
         model.addAttribute("totalProductos", productos.size());
         return "adminProducto/listado"; // Quita el slash al inicio
     }
-    
-    
-     @GetMapping("/nuevo")
+
+    @GetMapping("/nuevo")
     public String productoNuevo(Productos producto) {
         return "/adminProducto/modifica";
     }
-@Autowired
-private firebaseStorageService firebaseStorageService;
 
-@PostMapping("/guardar")
-public String productoGuardar(@ModelAttribute("producto") Productos producto,
-        @RequestParam("imagenFile") MultipartFile imagenFile) {        
-    if (!imagenFile.isEmpty()) {
-        // Guardar la imagen en Firebase Storage y establecer la URL en el producto
-        producto.setImagen_producto(firebaseStorageService.cargaImagen(imagenFile, "productos", producto.getId_producto()));
-    }
-    // Guardar el producto (una vez si la imagen no está vacía)
-    productosService.save(producto);
-    
-    return "redirect:/adminProducto/listado";
-}
+       @Autowired
+    private FirebaseStorageServiceImpl firebaseStorageService;
 
-    @GetMapping("/eliminar/{id_producto}")
-    public String productoEliminar(Productos producto) {
-        productosService.delete(producto);
+    @PostMapping("/guardar")
+    public String productoGuardar(Productos producto,
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
+        if (!imagenFile.isEmpty()) {
+            productosService.save(producto);
+            producto.setImagenfile(
+                    firebaseStorageService.cargaImagen(
+                            imagenFile,
+                            "producto",
+                            producto.getId_producto()));
+        }
+        productosService.save(producto);
         return "redirect:/adminProducto/listado";
     }
 
+    
+       @GetMapping("/eliminar/{id_producto}")
+    public String categoriaEliminar(Productos producto) {
+        productosService.delete(producto);
+        return "redirect:/adminProducto/listado";
+    }
     @GetMapping("/modifica/{id_producto}")
     public String productoModificar(Productos producto, Model model) {
+        var categorias = categoriaService.getCategorias();
         producto = productosService.getProducto(producto);
         model.addAttribute("producto", producto);
+        model.addAttribute("categorias", categorias);
         return "/adminProducto/modifica";
-    }   
+    }
 }
-

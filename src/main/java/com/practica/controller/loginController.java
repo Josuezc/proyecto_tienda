@@ -32,7 +32,7 @@ public class loginController {
     @GetMapping("/registro")
     public String showRegistroPage() {
        
-        return "Usuarios/registro"; 
+        return "Usuarios/listado"; 
     }
 
 

@@ -8,53 +8,142 @@
         <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>        
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script> 
+        <style>
+            .aside {
+                position: absolute;
+                top: 110px; /* Ajusta según la altura de tu header */
+                bottom: 50px; /* Ajusta según la altura de tu footer */
+                left: 0;
+                width: 230px; /* Ajusta el ancho del menú según tus preferencias */
+                background-color: #343a40; /* Color de fondo del menú */
+                overflow-y: auto; /* Agrega barras de desplazamiento si es necesario */
+                background-color: #324151; /* Cambia el color de fondo */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra */
+                padding: 10px; /* Añade espacio interno */
+            }
+
+            .aside .nav-link {
+                padding: 10px 20px; /* Ajusta el espaciado del enlace */
+            }
+
+            .aside .nav-link:hover {
+                background-color: #9599a2; /* Cambia el color de fondo al pasar el mouse */
+                border-radius: 5px; /* Añade bordes redondeados al pasar el mouse */
+            }
+              body {
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 50px;
+        }
+
+        footer { /* estilo footer */
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #9599a2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+
+        header a { /* estilo para las letras del header a */
+            color: #ffffff;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .navbar {/* Estilo para el navbar en el header  */
+            height: 90px;
+            width: 1500px;
+        }
+
+        /* Estilo para las flechas del carousel */
+        .carousel-control-prev, .carousel-control-next {
+            background-color: rgba(147, 146, 146, 0.356); /* Cambiar color de fondo */
+            width: 5%; /* Ancho de las flechas*/
+            top: 50%; /* Posiciona las flechas en el centro vertical */
+            transform: translateY(-50%); /* Centra verticalmente las flechas */
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            color: #020000; /* Cambiar color de las flechas */
+        }
+
+        /* Estilo para las imágenes del carousel */
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            max-height: calc(100vh - 150px); /* Ajustar altura máxima para evitar superposiciones de las imagenes */
+            margin-left: auto;
+            margin-right: auto;   
+        }
+
+        /* Estilo para el carrusel */
+        .carousel {
+            width: 80%; /* Ancho del carrusel */
+            margin: 0 auto; /* Centra horizontalmente el carrusel */
+        }
+        </style>
     </head>
     <body>
         <header th:fragment="header" class="header">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-                <div class="container">
-                    <a th:href="@{/}" class="navbar-brand">menu temporal</a>
-                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminCategoria/listado}">Categorias</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminCliente/listado}">Clientes</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminProducto/listado}">productos</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/Usuarios/inicio}">login</a></li>
-                            <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/menu/listado}">Menu</a></li>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+        <div class="container">
+            <a th:href="@{/}" class="navbar-brand">Menu</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <ul class="navbar-nav"><!--Opciones del menu // cambiar en el th:href por ruta exacta de pagina-->
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminCategoria/listado}">CategoriasAdmin</a></li>
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminCliente/listado}">ClientesAdmin</a></li>
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/adminProducto/listado}">productosAdmin</a></li>                  
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/menu/listado}">Menu</a></li>
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/Usuarios/inicio}">Inicio Sesion</a></li>
+                    <li class="nav-item px-2"><a class="nav-menu-link nav-link" th:href="@{/categorias/listado}">submenu</a></li>
+                    <li class="nav-item dropdown px-2">
+                        <a class="nav-link dropdown-toggle" href="@" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Servicios
+                        </a><!--se le aplica el dropdown para opciones de servicio -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="@{/Cotizar/completado}">Cotizar</a></li>
                             
                         </ul>
-                        <div class="col-md-3">
-                            <ul class="navbar-nav">                                
-                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=es)}">ES</a></li>
-                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=en)}">EN</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <section id="main-header" class="py-2 bg-danger text-white">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h1><i class="fas fa-cog"></i> Menu Temporal</h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </header>
-
-        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
-            <div class="container">
-                <div class="col">
-                    <p class="lead text-center">
-                        &COPY SHOP PROYECTO
-                    </p>
+                    </li>
+                </ul>
+                <div class="col-md-3">
+                    <ul class="navbar-nav">                                
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=es)}">ES</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/(lang=en)}">EN</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </div>
+    </nav>
+</header>
+        <aside th:fragment="aside" class="aside">
+            <nav class="col-md-2 bg-dark sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Categorías</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+
+       <footer>
+    <div>Todos nuestros precios incluyen I.V.A</div>
+    <div>&copy; Todos los derechos de autor</div>
+</footer>
     </body>
 </html>

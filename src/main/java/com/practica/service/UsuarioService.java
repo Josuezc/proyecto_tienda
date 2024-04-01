@@ -4,25 +4,25 @@
  */
 package com.practica.service;
 
-import com.practica.domain.Cliente;
+import com.practica.domain.Usuario;
 import java.util.List;
 
-public interface ClienteService {
+public interface UsuarioService {
 
     // Se obtiene un listado de categorias en un List
-    public List<Cliente> getClientes();
+    public List<Usuario> getUsuarios();
 
-    public List<Cliente> getClientesActivos(boolean activos);
+    public List<Usuario> getUsuariosActivos(boolean activos);
 
     // Se obtiene un Categoria, a partir del id de un categoria    
-    public Cliente getCategoria(Cliente cliente);
+    public Usuario getCategoria(Usuario usuario);
     // Se inserta un nuevo categoria si el id del categoria esta vacío    
     // Se actualiza un categoria si el id del categoria NO esta vacío   
 
-    public void save(Cliente cliente);
+    public void save(Usuario usuario);
     // Se elimina el categoria que tiene el id pasado por parámetro   
 
-    public void delete(Cliente cliente);
+    public void delete(Usuario usuario);
 
     public boolean existsByCedulaUsuario(long cedula_usuario);
 

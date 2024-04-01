@@ -13,9 +13,9 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "clientes")
+@Table(name = "usuarios")
 
-public class Cliente implements Serializable { //serializacion porque se va almacenar ciertos datos en el disco
+public class Usuario implements Serializable { //serializacion porque se va almacenar ciertos datos en el disco
 
     private static final long serialVersionUID = 1L; //para poder hacer el ciclo de la sumatoria de la categoria.
 
@@ -25,22 +25,23 @@ public class Cliente implements Serializable { //serializacion porque se va alma
     
   
     private long cedula_usuario;
-    private String nombre_cliente;
-    private String apellido_cliente;
-    private String correo_cliente;
-    private String contrasena_cliente;
+    private String nombre_usuario;
+    private String apellido_usuario;
+    private String correo_usuario;
+    private String contrasena_usuario;
+    private String roles;
 
-    public Cliente(String contrasena_cliente) {
-        this.contrasena_cliente = contrasena_cliente;
+    public Usuario(String contrasena_usuario) {
+        this.contrasena_usuario = contrasena_usuario;
     }
-    private String direccion_cliente;
+    private String direccion_usuario;
     private boolean activo;
    
 
-    public Cliente() {
+    public Usuario() {
     }
 
-    public Cliente(long cedula_usuario, boolean activo) {
+    public Usuario(long cedula_usuario, boolean activo) {
         this.cedula_usuario = cedula_usuario;
      
         this.activo = activo;

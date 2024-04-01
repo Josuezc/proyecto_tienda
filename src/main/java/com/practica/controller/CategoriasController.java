@@ -41,24 +41,24 @@ public class CategoriasController {
         return "categorias/listado"; // Quita el slash al inicio
     }
 
-@GetMapping("/listado/{idCategoria}")
-    public String listado(Model model, Categorias categoria) {
-         
-        var productos = categoriaService.getCategoria(categoria).getProductos();
-        var categorias = categoriaService.getCategorias();
-        model.addAttribute("productos", productos);
-        model.addAttribute("totalProductos",productos.size());
-        model.addAttribute("categorias", categorias);
-        return "/categorias/listado";
-        
-    
-    }
-    
-   @GetMapping("/listado2")
+ @GetMapping("/listado/{idCategoria}")
+public String listado(Model model, @PathVariable("idCategoria") Categorias idCategoria) {
+    Categorias categoria = categoriaService.getCategoria(idCategoria);
+   
+    var productos = categoria.getProductos();
+    var categorias = categoriaService.getCategorias();
+    model.addAttribute("productos", productos);
+    model.addAttribute("totalProductos", productos.size());
+    model.addAttribute("categorias", categorias);
+    return "/categorias/listado";
+}
+
+    @GetMapping("/listado2")
     private String listado2(Model model) {
-        var productos = productosService.getProductos();        
-        model.addAttribute("productos", productos);       
-        return "/categorias/listado2";
+        var productos = productosService.getProductos();
+        model.addAttribute("productos", productos);
+        return "/pruebas/listado2";
     }
+ 
 
 }

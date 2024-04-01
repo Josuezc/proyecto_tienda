@@ -5,10 +5,10 @@
 package com.practica.dao;
 
 
-import com.practica.domain.Cliente;
+import com.practica.domain.Usuario;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
  
-public interface ClienteDao extends JpaRepository <Cliente,Long> {
+public interface UsuarioDao extends JpaRepository <Usuario,Long> {
   
 }

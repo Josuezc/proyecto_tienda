@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.practica</groupId>
-	<artifactId>Proyecto_tienda</artifactId>
-	<version>1</version>
-	<name>Proyecto_tienda</name>
-	<description>Proyecto_tienda</description>
-	<properties>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.practica</groupId>
+    <artifactId>Proyecto_tienda</artifactId>
+    <version>1</version>
+    <name>Proyecto_tienda</name>
+    <description>Proyecto_tienda</description>
+    <properties>
         <java.version>18</java.version>
     </properties>
     <dependencies>
@@ -55,16 +55,16 @@
             <groupId>org.webjars</groupId>
             <artifactId>font-awesome</artifactId>
             <version>6.4.2</version>
-             </dependency>
+        </dependency>
             
-       <dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.7.1</version>
             
-             </dependency>
+        </dependency>
              
-            <dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>popper.js</artifactId>
             <version>2.11.7</version>	
@@ -72,20 +72,20 @@
 		
       
             
-            <dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
             <version>0.46</version>
 			
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
 			
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             
@@ -96,12 +96,19 @@
             <artifactId>firebase-admin</artifactId>             
             <version>9.2.0</version>         
         </dependency>
-         <dependency>
-        <groupId>org.hibernate.validator</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>6.2.0.Final</version> <!-- Utiliza la versión más reciente disponible -->
-    </dependency>
-        
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.2.0.Final</version> <!-- Utiliza la versión más reciente disponible -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

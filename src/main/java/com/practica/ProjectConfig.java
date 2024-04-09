@@ -70,7 +70,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
 
-    @Bean
+   @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
@@ -78,7 +78,8 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/carrito/**", "/categorias/**", "/reportes/**",
                         "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
                 , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
-                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}")
+                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
+                ,"/menu","/carrusel","index","/menu/carrusel/1")
                 .permitAll()
                 .requestMatchers(
                         "/adminProducto/nuevo", "/adminProducto/guardar","/adminProducto/listado",

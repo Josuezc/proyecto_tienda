@@ -1,12 +1,111 @@
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" 
       xmlns="http://www.w3.org/1999/xhtml">
     <head th:replace="~{layout/plantilla :: head}">
+        <meta charset="UTF-8"/>
+
         <title>Practica01</title>        
+        <style>
+            body {
+                min-height: 100vh;
+                position: relative;
+                padding-bottom: 50px;
+                background-color: #9599a2;
+            }
+
+            footer { /* estilo footer */
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: #9599a2;
+                color: white;
+                text-align: center;
+                padding: 20px;
+            }
+
+
+            header a { /* estilo para las letras del header a */
+                color: #ffffff;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+            .navbar {/* Estilo para el navbar en el header  */
+                height: 90px;
+                width: 1500px;
+            }
+
+            /* Estilo para las flechas del carousel */
+            .carousel-control-prev, .carousel-control-next {
+                background-color: rgba(147, 146, 146, 0.356); /* Cambiar color de fondo */
+                width: 5%; /* Ancho de las flechas*/
+                top: 50%; /* Posiciona las flechas en el centro vertical */
+                transform: translateY(-50%); /* Centra verticalmente las flechas */
+            }
+
+            .carousel-control-prev-icon, .carousel-control-next-icon {
+                color: #020000; /* Cambiar color de las flechas */
+            }
+
+            /* Estilo para las imágenes del carousel */
+            .carousel-item img {
+                max-width: 100%;
+                height: auto;
+                max-height: calc(100vh - 150px); /* Ajustar altura máxima para evitar superposiciones de las imagenes */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Estilo para el carrusel */
+            .carousel {
+                width: 80%; /* Ancho del carrusel */
+                margin: 0 auto; /* Centra horizontalmente el carrusel */
+            }
+
+        </style>
     </head>
-    <body>
+    <body style="background-color: #ffffff;">
         <header th:replace="~{layout/plantilla :: header}"/>
-        
-        <footer th:replace="~{layout/plantilla :: footer}"/>          
+
+
+        <!--se cargan las imagenes y se crea el carousel -->
+        <div id="carouselExampleFade" class="carousel slide carousel-fade d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: calc(100vh - 150px);">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active text-center" >
+                    <figure class="figure d-flex justify-content-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proyectotienda-a7723.appspot.com/o/proyectotienda%2Fcarrusel%2Fmouse.jpg?alt=media&token=0265bd39-e40f-4037-8a4c-53daa286af38" alt="Mouse" width="800">
+
+                    </figure>
+                </div>
+                <div class="carousel-item active text-center" >
+                    <figure class="figure d-flex justify-content-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proyectotienda-a7723.appspot.com/o/proyectotienda%2Fcarrusel%2Flaptop.jpg?alt=media&token=48b73744-2bdc-489a-ada2-1973b4feab80" alt="Laptop" width="800">
+                    </figure>
+                </div>
+                <div class="carousel-item text-center">
+                    <figure class="figure d-flex justify-content-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proyectotienda-a7723.appspot.com/o/proyectotienda%2Fcarrusel%2Fcomponente.jpg?alt=media&token=9124f5a9-a9e5-45d9-a897-03a3efeaac2e" alt="Procesador" width="800">
+
+                    </figure>
+                </div>
+                <div class="carousel-item text-center">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/proyectotienda-a7723.appspot.com/o/proyectotienda%2Fcarrusel%2Fteclado.jpg?alt=media&token=6e1c9860-fee7-4be5-952a-f130f7b45d33" alt="Teclado" width="755"> 
+
+                </div>
+            </div>    
+        </div>
+        <!--Codigo de las flechas del carousel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev" >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next" >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>   
+
     </body>
 </html>
-

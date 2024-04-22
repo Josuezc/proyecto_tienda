@@ -1,25 +1,16 @@
-
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
-
-      xmlns="http://www.w3.org/199/xhtml">
-
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
     <head th:replace="~{layout/plantilla :: head}">
-
         <title>Technology Shop</title>
-
     </head>
-
     <body>
-
         <header th:replace="~{layout/plantilla :: header}"/>
-          <aside th:replace="~{layout/plantilla :: aside}"/>
 
-        <section th:replace="~{adminProducto/fragmentos :: editarProducto}"/>
+        <section th:replace="~{carrito/facturar :: listadoCarrito}"/>
 
         <footer th:replace="~{layout/plantilla :: footer}"/>
 
     </body>
-
 </html>

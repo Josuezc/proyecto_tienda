@@ -53,7 +53,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
-    /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
+    
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -67,51 +67,39 @@ public class ProjectConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/errores/**",
-                        "/carrito/**", "/categorias/**", "/reportes/**",
-                        "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
-                , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
-                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
-                ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion","/menu/","/", "/index", "/errores/**",
-                        "/carrito/**", "/**","/login/","/login/index",
-                        "/registro/**", "/js/**", "/webjars/**")
+                .requestMatchers("/", "/index", "/errores/**","/carrito/facturar","/facturar",
+                                "/carrito/**", "/categorias/**", "/reportes/**",
+                                "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
+                                , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
+                                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}",
+                                "/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
+                                ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion",
+                                "/menu/","/", "/index", "/errores/**",
+                                "/carrito/**", "/**","/login/","/login/index",
+                                "/registro/**", "/js/**", "/webjars/**")
                 .permitAll()
-                .requestMatchers(
-                        
-                        
+                .requestMatchers(  
                         "/", "/index", "/errores/**",
                         "/carrito/**", "/categorias/**", "/reportes/**",
                         "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
-                , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
-                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
-                ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion","/menu/","/", "/index", "/errores/**",
+                        , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
+                        , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}",
+                        "/carrusel/{idProducto}"
+                        ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion","/menu/","/", "/index", "/errores/**",
                         "/carrito/**", 
                         "/registro/**", "/js/**", "/webjars/**",
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        "/adminProducto/nuevo", "/adminProducto/guardar","/adminProducto/listado",
+                         "/adminProducto/nuevo", "/adminProducto/guardar","/adminProducto/listado",
                         "/adminProducto/modifica/**", "/adminProducto/eliminar/**",
-                        
                         "/adminCategoria/nuevo", "/adminCategoria/guardar",
                         "/adminCategoria/modifica/**", "/adminCategoria/eliminar/**",
-                        
                         "/adminUsuario/nuevo", "/adminUsuario/guardar","/adminUsuario/listado",
-                        "/adminUsuario/modifica/**", "/adminUsuario/eliminar/**","/adminUsuario/guardarIf/",
-                        
-                        
+                        "/adminUsuario/modifica/**", "/adminUsuario/eliminar/**","/adminUsuario/guardarIf/",   
                         "/reportes/**",  "/adminProducto/listado"
                         ,  "/adminUsuario/listado",  "/adminCategoria/listado","/facturar/carrito",
                         "/categorias/listado",
                         "/Cotizar/completado","/categorias/listado","Cotizar/servicio"
-                , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
-                , "/Cotizar/guardar"
+                        , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
+                        , "/Cotizar/guardar"
                 ).hasRole("ADMIN")
                 .requestMatchers(
                         "/producto/listado",

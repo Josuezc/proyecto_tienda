@@ -38,6 +38,7 @@ public class CarritoController {
                 carritoTotalVenta);
         return "/carrito/listado";
     }    
+    
    
     //Para Agregar un producto al carrito
     @GetMapping("/carrito/agregar/{id_producto}")
@@ -124,10 +125,5 @@ public class CarritoController {
         return "redirect:/carrito/listado";
     }
 
-    //Para facturar los productos del carrito... no implementado...
-    @GetMapping("/facturar/carrito")
-    public String facturarCarrito() {
-        itemService.facturar();
-        return "redirect:/factura/listado";
-    }
+    
 }

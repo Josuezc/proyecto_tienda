@@ -22,71 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  @Controller
 @RequestMapping("/adminUsuario")
 public class AdminUsuarioController {
-  /*
-    @Autowired
-    private UsuarioService usuarioService;
-    
-    @GetMapping("/listado")
-private String listado(Model model) {
-      
-    var usuarios = usuarioService.getUsuarios();
-    model.addAttribute("usuarios", usuarios);
-    model.addAttribute("totalUsuarios", usuarios.size());
-    return "/adminUsuario/listado";
-   
-}
-    
-    
-     @GetMapping("/nuevo")
-    public String categoriaNuevo(Usuario usuario) {
-        return "/usuario/modifica";
-    }
-@Autowired
-    private FirebaseStorageService firebaseStorageService;
   
-   @PostMapping("/guardar")
-    public String usuarioGuardar(Usuario usuario,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {
-        if (!imagenFile.isEmpty()) {
-            usuarioService.save1(usuario);
-            usuario.setRutaImagen(
-                    firebaseStorageService.cargaImagen(
-                            imagenFile,
-                            "usuario",
-                            usuario.getIdUsuario()));
-        }
-        usuarioService.save1(usuario);
-        return "redirect:/adminUsuario/listado";
-    }
-
-    @PostMapping("/guardarIf")
-    public String guardarUsuarioConValidacion(@ModelAttribute("adminUsuario") Usuario usuario, Model model) {
-        if (usuarioService.existsByCedulaUsuario(usuario.getIdUsuario())) {
-           
-            model.addAttribute("error", "La cédula de usuario ya existe.");
-            return "/adminUsuario/listado";
-        }
-        usuarioService.save1(usuario);
-        return "redirect:/adminUsuario/listado";
-    }
-    
-    
- 
-    
-    
-    @GetMapping("/eliminar/{idUsuario}")
-    public String categoriaEliminar(Usuario usuario) {
-        usuarioService.delete(usuario);
-        return "redirect:/adminUsuario/listado";
-    }
-
-    @GetMapping("/modifica/{id_usuario}")
-    public String categoriaModificar(Usuario usuario, Model model) {
-        usuario = usuarioService.getUsuario(usuario);
-        model.addAttribute("usuario", usuario);
-        return "adminUsuario/modifica";
-    }
-    */
 
  @Autowired
     private UsuarioService usuarioService;

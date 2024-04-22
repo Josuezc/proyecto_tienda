@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Technology Shop</title>
+    </head>
+    <body>  
+        
+
+        <section th:fragment="listadoCarrito" id="items">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Factura</h4>
+                            </div>
+                            <div th:if="${items != null and !items.empty}">
+                                <table class="table table-stryped text-center">
+                                    <thead class="thead-dark  text-center">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>[[#{producto.descripcion}]]</th>
+                                            <th>[[#{producto.precio}]]</th>
+                                            <th>[[#{carrito.cantidad}]]</th>
+                                            <th>[[#{carrito.total}]]</th>
+                                            
+                                        </tr>                                        
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="item, contador : ${items}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${item.getNombre_producto}]]</td>
+                                            <td class="text-end">[[${item.getPrecio_producto}]]</td>
+                                            <td class="text-center">[[${item.getCantidad}]]</td>
+                                            <td class="text-center">[[${item.getCantidad*item.getPrecio_producto}]]</td>
+                                                                                       
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${items== null or items.empty}">
+                                [[#{carrito.no_mostrar}]]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-primary text-white mb-3">
+                            <div class="card-body">
+                                
+                                <h3>[[#{carrito.totalCompra}]]</h3>
+                                <h4 class="fs-4">
+                                    [[${carritoTotal}]]
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <a th:href="@{/categorias/finalizar}"
+                                   class="btn btn-success">
+                                    <i class='fas fa-reply'></i> Finalizar
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+    </body>
+</html>

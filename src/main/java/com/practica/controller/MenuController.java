@@ -6,6 +6,7 @@ package com.practica.controller;
 
 import com.practica.domain.Productos;
 import com.practica.service.CategoriasService;
+import com.practica.service.ItemService;
 import com.practica.service.productosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,4 +49,6 @@ public class MenuController {
 
         return "/ubicacion/fragmento";
     }
+
+   
 }

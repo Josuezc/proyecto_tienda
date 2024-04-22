@@ -59,7 +59,7 @@ public interface UsuarioService {
     // Se inserta un nuevo usuario si el id del usuario esta vacío
     // Se actualiza un usuario si el id del usuario NO esta vacío
     public void save(Usuario usuario,boolean crearRolUser);
-    public void save1(Usuario usuario);
+   // public void save1(Usuario usuario);
     // Se elimina el usuario que tiene el id pasado por parámetro
     public void delete(Usuario usuario); 
     

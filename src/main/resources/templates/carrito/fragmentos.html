@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://thymeleaf.org/extras/spring-security">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Technology Shop</title>
     </head>
     <body>  
         
@@ -83,7 +83,7 @@
                         </div>
                         <div class="card text-center bg-info text-white mb-3">
                             <div class="card-body">
-                                <a th:href="@{/facturar/carrito}"
+                                <a th:href="@{/categorias/facturar}"
                                    class="btn btn-info">
                                     <i class='fas fa-fordward'></i> [[#{carrito.facturar}]]
                                 </a>

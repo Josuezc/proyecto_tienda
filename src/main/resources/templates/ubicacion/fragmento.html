@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <title>ubicacion</title>
+        <meta charset="UTF-8"/>
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script> 
+        <style>
+                body {
+                    background-color: #423f3f;
+                    text-align: center;
+                }
+                #wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3 { /*se llama por id la direccion del mapa(div) */
+                    margin: 0 auto;
+                    max-width: 800px;
+                    background-color: white;
+                    padding: 20px;
+                }
+                #map-9cd199b9cc5410cd3b1ad21cab2e54d3 { /*se llama por id la direccion del mapa(div) */
+                    width: 100%;
+                    height: 600px;
+                }
+
+                h1{
+                    color: rgb(255, 255, 255);
+                    font-family: 'Courier New', Courier, monospace;
+                }
+
+                h3{
+                    color: rgb(255, 255, 255);
+                    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+                }
+
+                footer{
+                    background-color: #333;
+                    padding: 20px;
+                }
+
+
+            </style>
+    </head>
+
+
+    <header th:replace="~{layout/plantilla :: header}"/>
+    <h1>Ubicaciones Tiendas</h1>
+
+    <body>
+
+        <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+            <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div><script>(function () {
+                    var setting = {"query": "ExtremeTech, Calle 9, San José, Catedral, Costa Rica", "width": 800, "height": 600, "satellite": true, "zoom": 15, "placeId": "ChIJc00vVmHjoI8REglo7zC1wIo", "cid": "0x8ac0b530ef680912", "coords": [9.9331032, -84.0749123], "cityUrl": "/costa-rica/san-jose", "cityAnchorText": "Mapa de San José, San José, Costa Rica", "lang": "es", "queryString": "ExtremeTech, Calle 9, San José, Catedral, Costa Rica", "centerCoord": [9.9331032, -84.0749123], "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3", "embed_id": "1097775"};
+                    var d = document;
+                    var s = d.createElement('script');
+                    s.src = 'https://1map.com/js/script-for-user.js?embed_id=1097775';
+                    s.async = true;
+                    s.onload = function (e) {
+                        window.OneMap.initMap(setting)
+                    };
+                    var to = d.getElementsByTagName('script')[0];
+                    to.parentNode.insertBefore(s, to);
+                })();</script></div>
+
+        <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+            <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div><script>(function () {
+                    var setting = {"query": "ExtremeTech, San José, San Pedro, Costa Rica", "width": 800, "height": 600, "satellite": true, "zoom": 16, "placeId": "ChIJf4wMzoXjoI8RnAqHrL6SE5Y", "cid": "0x961392beac870a9c", "coords": [9.9318497, -84.05016409999999], "cityUrl": "/venezuela/san-pedro-385530", "cityAnchorText": "Mapa de San Pedro, Venezuela", "lang": "es", "queryString": "ExtremeTech, San José, San Pedro, Costa Rica", "centerCoord": [9.9318497, -84.05016409999999], "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3", "embed_id": "1097775"};
+                    var d = document;
+                    var s = d.createElement('script');
+                    s.src = 'https://1map.com/js/script-for-user.js?embed_id=1097775';
+                    s.async = true;
+                    s.onload = function (e) {
+                        window.OneMap.initMap(setting)
+                    };
+                    var to = d.getElementsByTagName('script')[0];
+                    to.parentNode.insertBefore(s, to);
+                })();</script></div>
+
+        <footer>
+            <h3>Technology Shop</h3>
+            <h3>Contacto:Jose Alfaro</h3>
+            <h3>Correo:technology@gmail.com</h3>
+            <h3>Instagram:technology</h3>
+        </footer>
+    </body>
+</html>

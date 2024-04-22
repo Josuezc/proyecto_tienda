@@ -1,21 +1,15 @@
 package com.practica;
 
 import java.util.Locale;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -27,9 +21,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
 
-    /* Los siguientes métodos son para incorporar el tema de internacionalización en el proyecto */
-
- /* localeResolver se utiliza para crear una sesión de cambio de idioma*/
+    /* Los siguientes métodos son para hacer uso de Internacionalización */
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -38,6 +30,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         slr.setTimeZoneAttributeName("session.current.timezone");
         return slr;
     }
+
 
     /* localeChangeInterceptor se utiliza para crear un interceptor de cambio de idioma*/
     @Bean
@@ -55,20 +48,20 @@ public class ProjectConfig implements WebMvcConfigurer {
     //Bean para poder acceder a los Messages.properties en código...
     @Bean("messageSource")
     public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        ResourceBundleMessageSource messageSource= new ResourceBundleMessageSource();
         messageSource.setBasenames("messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
-
     /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
-    }
+ }
 
    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -79,9 +72,30 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
                 , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
                 , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
-                ,"/menu","/carrusel","index","/menu/carrusel/1")
+                ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion","/menu/","/", "/index", "/errores/**",
+                        "/carrito/**", "/**","/login/","/login/index",
+                        "/registro/**", "/js/**", "/webjars/**")
                 .permitAll()
                 .requestMatchers(
+                        
+                        
+                        "/", "/index", "/errores/**",
+                        "/carrito/**", "/categorias/**", "/reportes/**",
+                        "/login/**", "/js/**", "/webjars/**","/categorias/listado","/Cotizar/Cotizar"
+                , "/Cotizar/servicio", "/Cotizar/completado", "/Cotizar/enviar"
+                , "/Cotizar/guardar","/Cotizar/completado","/listado/{idCategoria}","/categorias/listado/{idCategoria}","/carrusel/{idProducto}"
+                ,"/menu","/carrusel","index","/menu/carrusel/1","/menu/ubicacion","/menu/","/", "/index", "/errores/**",
+                        "/carrito/**", 
+                        "/registro/**", "/js/**", "/webjars/**",
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         "/adminProducto/nuevo", "/adminProducto/guardar","/adminProducto/listado",
                         "/adminProducto/modifica/**", "/adminProducto/eliminar/**",
                         
@@ -114,24 +128,16 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
 
   
- @Bean
-    public UserDetailsService users() {
-        UserDetails admin = User.builder()
-                .username("juan")
-                .password("{noop}123")
-                .roles("USER", "VENDEDOR", "ADMIN")
-                .build();
-        UserDetails sales = User.builder()
-                .username("rebeca")
-                .password("{noop}456")
-                .roles("USER", "VENDEDOR")
-                .build();
-        UserDetails user = User.builder()
-                .username("pedro")
-                .password("{noop}789")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user, sales, admin);
+  
+   @Autowired
+   private UserDetailsService userDetailsService;
+    
+    @Autowired
+    public void configurerGlobal(AuthenticationManagerBuilder build)
+            throws Exception {
+        build
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
    
 }

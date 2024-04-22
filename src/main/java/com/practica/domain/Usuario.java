@@ -4,51 +4,40 @@
  */
 package com.practica.domain;
 
-
-
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
-
 
 @Data
 @Entity
 @Table(name = "usuarios")
 
-public class Usuario implements Serializable { //serializacion porque se va almacenar ciertos datos en el disco
+public class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L; //para poder hacer el ciclo de la sumatoria de la categoria.
-
-    @Id //id categoria es la llave de la tabla categoria. 
-    //@GeneratedValue(strategy = GenerationType.IDENTITY) //Los valores generados que estrategia usan, identico a la BD 
-    @Column(name = "cedula_usuario") //decir cual es el nombre en la base de datos. Se hace la asociación 
-    
-  
-    private long cedula_usuario;
-    private String nombre_usuario;
-    private String apellido_usuario;
-    private String correo_usuario;
-    private String contrasena_usuario;
-    private String roles;
-
-    public Usuario(String contrasena_usuario) {
-        this.contrasena_usuario = contrasena_usuario;
-    }
-    private String direccion_usuario;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column (name = "id_usuario")
+    private Long idUsuario;
+    private String username;
+    private String password;
+    private String nombre;
+    private String apellidos;
+    private String correo;
+    private String telefono;
+    private String rutaImagen;    
     private boolean activo;
-   
-
     public Usuario() {
     }
+    @OneToMany
+    @JoinColumn(name="id_usuario")
+    List<Rol> roles;
 
-    public Usuario(long cedula_usuario, boolean activo) {
-        this.cedula_usuario = cedula_usuario;
-     
+    public Usuario(long idUsuario, boolean activo) {
+        this.idUsuario = idUsuario;
+
         this.activo = activo;
     }
-
-   
-
-   
 
 }

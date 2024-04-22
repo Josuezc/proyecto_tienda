@@ -18,26 +18,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  * @author alexa
  */
-    @Controller
-    @RequestMapping("/menu")
-    public class MenuController {
-      @Autowired
-        private productosService productosService;
-        @Autowired
-        private CategoriasService categoriaService;
+@Controller
+@RequestMapping("/menu")
+public class MenuController {
 
-        @GetMapping("/listado")
-        public String showListadoPage() {
-            // Lógica para mostrar la página de listado
-            return "categorias/listado"; // Asegúrate de que esta sea la vista correcta
-        }
+    @Autowired
+    private productosService productosService;
+    @Autowired
+    private CategoriasService categoriaService;
+
+    
+
+    @GetMapping("/listado")
+    public String showListadoPage() {
+        // Lógica para mostrar la página de listado
+        return "categorias/listado"; // Asegúrate de que esta sea la vista correcta
+    }
+
     @GetMapping("/carrusel/{idProducto}")
 
     public String listado(Model model, @PathVariable("idProducto") Productos Productos) {
-        Productos producto = productosService.getProducto(Productos);   
-        model.addAttribute("productos", producto);   
+        Productos producto = productosService.getProducto(Productos);
+        model.addAttribute("productos", producto);
         return "index";
-    } 
     }
 
- 
+    @GetMapping("/ubicacion")
+    public String showubicacion() {
+
+        return "/ubicacion/fragmento";
+    }
+}

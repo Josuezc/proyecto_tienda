@@ -36,7 +36,8 @@ public class Productos implements Serializable { //serializacion porque se va al
     private String nombre_producto;
     private double precio_producto;
     private int cantidad_producto;
-    private String imagenfile;     
+    private String imagenfile;   
+    private String descripcion_producto;
     //private long id_categoria;
     @ManyToOne
     @JoinColumn(name = "id_categoria")

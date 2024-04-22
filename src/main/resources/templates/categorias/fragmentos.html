@@ -2,17 +2,90 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>TechShop</title>
-</head>
-<body >
-   
-    <section th:fragment="categoriasTabs" id="categorias" style="display: flex; flex-direction: column; align-items: center;">
-        <div style="overflow-x: auto;">
-            <ul style="list-style-type: none; white-space: nowrap; padding: 0; margin: 0;">
-                <li th:each="categoria : ${categorias}" style="display: inline-block; margin-right: 10px;">
-                    <a th:href="@{/categorias/listado/{idCategoria}(idCategoria=${categoria.id_categoria})}" style="text-decoration: none;">
-                        <button style="background-color: #1e2c39; /* Green */
+    <head>
+        <title>TechShop</title>
+        <style>
+            /* Estilo del modal */
+            .modal {
+                display: none; /* Ocultar el modal por defecto */
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+            }
+
+            /* Contenido del modal */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            /* Botón para cerrar el modal */
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+
+    </head>
+    <body >
+
+        <section th:fragment="categoriasTabs" id="categorias" style="display: flex; flex-direction: column; align-items: center;">
+            <div style="overflow-x: auto;">
+                <ul style="list-style-type: none; white-space: nowrap; padding: 0; margin: 0;">
+                    <li th:each="categoria : ${categorias}" style="display: inline-block; margin-right: 10px;">
+                        <a th:href="@{/categorias/listado/{idCategoria}(idCategoria=${categoria.id_categoria})}" style="text-decoration: none;">
+                            <button style="background-color: #1e2c39; /* Green */
+                                    border: none;
+                                    color: white;
+                                    padding: 10px 20px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                    font-size: 16px;
+                                    border-radius: 5px;
+                                    transition-duration: 0.4s;
+                                    cursor: pointer;
+                                    margin-top: 10px;">
+                                <span th:text="${categoria.nombre_categoria}"></span>
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section> 
+
+
+
+        <section th:fragment="listadoProductos" id="productos" >
+            <div class="row row-cols-4 justify-content-center">
+                <div class="card mb-3" th:each="producto : ${productos}" style="margin-right: 10px; margin-top: 10px; margin-bottom: 50px;">
+                    <figure>
+                        <img th:src="${producto.imagenfile}" alt="Imagen del producto" height="180px"/>
+                        <figcaption>
+                            <span th:text="'$ ' + ${producto.precio_producto}"></span> 
+                            <span th:text="'   Disponible: ' + ${producto.cantidad_producto}"></span>
+                        </figcaption>
+                    </figure>
+                    <div class="card-header">
+                        <h4 class="card-title" th:text="${producto.nombre_producto}"></h4>
+                        <!-- comment       <button style="background-color: #1e2c39; /* Green */
                                 border: none;
                                 color: white;
                                 padding: 10px 20px;
@@ -23,49 +96,39 @@
                                 border-radius: 5px;
                                 transition-duration: 0.4s;
                                 cursor: pointer;
-                                margin-top: 10px;">
-                            <span th:text="${categoria.nombre_categoria}"></span>
-                        </button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section> 
-    
-    
-   
-    <section th:fragment="listadoProductos" id="productos" >
-    <div class="row row-cols-4 justify-content-center">
-        <div class="card mb-3" th:each="producto : ${productos}" style="margin-right: 10px; margin-top: 10px; margin-bottom: 50px;">
-            <figure>
-                <img th:src="${producto.imagenfile}" alt="Imagen del producto" height="180px"/>
-                <figcaption>
-                    <span th:text="'$ ' + ${producto.precio_producto}"></span> 
-                    <span th:text="'   Disponible: ' + ${producto.cantidad_producto}"></span>
-                </figcaption>
-            </figure>
-            <div class="card-header">
-                <h4 class="card-title" th:text="${producto.nombre_producto}"></h4>
-                <button style="background-color: #1e2c39; /* Green */
-                            border: none;
-                            color: white;
-                            padding: 10px 20px;
-                            text-align: center;
-                            text-decoration: none;
-                            display: inline-block;
-                            font-size: 16px;
-                            border-radius: 5px;
-                            transition-duration: 0.4s;
-                            cursor: pointer;
-                            margin-top: 10px;">
-                    <span>Agregar</span>
-                </button>
-            </div>
-        </div>
-    </div>
-        <div style="margin: 100px;"></div>
-</section> 
-  
+                                margin-top: 10px;" >
+                            <span>Agregar</span>
+                        </button>-->
+                        <form th:action="@{'/categorias/agregar/' + ${producto.id_producto}}" method="get">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i> Agregar al carrito
+                            </button>
+                        </form>
+                      
 
-</body>
+                        <!-- Modal para mostrar el carrito -->
+
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 100px;"></div>
+
+
+        </section> 
+
+
+   <div th:fragment="verCarrito" th:unless="${#lists.isEmpty(listaItems)}" style="text-align: center; background-color: #f0f0f0; padding: 20px; border-radius: 10px; margin-top: 20px;">            
+    <form action="/carrito/listado" style="display: inline;">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-cart-plus"></i>
+            [[#{carrito.verCarrito}]] [[${listaTotal}]]
+        </button>
+    </form>
+    <a href="/categorias/listado" class="btn btn-primary">Seguir comprando</a>
+</div>  
+
+      
+       
+
+    </body>
 </html>

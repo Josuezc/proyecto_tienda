@@ -6,6 +6,7 @@ package com.practica.controller;
 
 import com.practica.service.UsuarioService;
 import com.practica.domain.Usuario;
+import com.practica.service.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,20 +14,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
  @Controller
 @RequestMapping("/adminUsuario")
 public class AdminUsuarioController {
-  
+  /*
     @Autowired
     private UsuarioService usuarioService;
     
     @GetMapping("/listado")
 private String listado(Model model) {
       
-    var usuarios = usuarioService.getUsuariosActivos(false);
+    var usuarios = usuarioService.getUsuarios();
     model.addAttribute("usuarios", usuarios);
     model.addAttribute("totalUsuarios", usuarios.size());
     return "/adminUsuario/listado";
@@ -38,24 +41,32 @@ private String listado(Model model) {
     public String categoriaNuevo(Usuario usuario) {
         return "/usuario/modifica";
     }
-
+@Autowired
+    private FirebaseStorageService firebaseStorageService;
   
    @PostMapping("/guardar")
-    public String categoriaGuardar(Usuario usuario){
-            
-            usuarioService.save(usuario);
-        
+    public String usuarioGuardar(Usuario usuario,
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
+        if (!imagenFile.isEmpty()) {
+            usuarioService.save1(usuario);
+            usuario.setRutaImagen(
+                    firebaseStorageService.cargaImagen(
+                            imagenFile,
+                            "usuario",
+                            usuario.getIdUsuario()));
+        }
+        usuarioService.save1(usuario);
         return "redirect:/adminUsuario/listado";
     }
 
     @PostMapping("/guardarIf")
     public String guardarUsuarioConValidacion(@ModelAttribute("adminUsuario") Usuario usuario, Model model) {
-        if (usuarioService.existsByCedulaUsuario(usuario.getCedula_usuario())) {
+        if (usuarioService.existsByCedulaUsuario(usuario.getIdUsuario())) {
            
             model.addAttribute("error", "La cédula de usuario ya existe.");
             return "/adminUsuario/listado";
         }
-        usuarioService.save(usuario);
+        usuarioService.save1(usuario);
         return "redirect:/adminUsuario/listado";
     }
     
@@ -63,21 +74,67 @@ private String listado(Model model) {
  
     
     
-    @GetMapping("/eliminar/{cedula_usuario}")
+    @GetMapping("/eliminar/{idUsuario}")
     public String categoriaEliminar(Usuario usuario) {
         usuarioService.delete(usuario);
         return "redirect:/adminUsuario/listado";
     }
 
-    @GetMapping("/modifica/{cedula_usuario}")
+    @GetMapping("/modifica/{id_usuario}")
     public String categoriaModificar(Usuario usuario, Model model) {
-        usuario = usuarioService.getCategoria(usuario);
+        usuario = usuarioService.getUsuario(usuario);
         model.addAttribute("usuario", usuario);
         return "adminUsuario/modifica";
     }
+    */
+
+ @Autowired
+    private UsuarioService usuarioService;
+
+    @GetMapping("/listado")
+    public String listado(Model model) {
+        var usuarios = usuarioService.getUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("totalUsuarios", usuarios.size());
+        return "/adminUsuario/listado";
+    }
+
+    @GetMapping("/nuevo")
+    public String usuarioNuevo(Usuario usuario) {
+        return "/adminUsuario/modifica";
+    }
+
+    @Autowired
+    private FirebaseStorageService firebaseStorageService;
+
+    @PostMapping("/guardar")
+    public String usuarioGuardar(Usuario usuario,
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
+        if (!imagenFile.isEmpty()) {
+            usuarioService.save(usuario,false);
+            usuario.setRutaImagen(
+                    firebaseStorageService.cargaImagen(
+                            imagenFile,
+                            "usuario",
+                            usuario.getIdUsuario()));
+        }
+        usuarioService.save(usuario,true);
+        return "redirect:/adminUsuario/listado";
+    }
+
+    @GetMapping("/eliminar/{idUsuario}")
+    public String usuarioEliminar(Usuario usuario) {
+        usuarioService.delete(usuario);
+        return "redirect:/adminUsuario/listado";
+    }
+
+    @GetMapping("/modifica/{idUsuario}")
+    public String usuarioModificar(Usuario usuario, Model model) {
+        usuario = usuarioService.getUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "/adminUsuario/modifica";
+    }
     
-
-
  
    
 
